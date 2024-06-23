@@ -1,5 +1,8 @@
-# -*- coding: UTF-8 -*-
-#  赋值
+# @2024
+# 开始时间2024-04-04
+# 单人开发(702361946@qq.com)
+# 版权所有，拒绝盗用
+# 赋值
 if True:
     import random
     import os
@@ -48,6 +51,7 @@ if True:
     field_current = random.randint(field_min, field_max)
     vc_f = population * vc_f_m
 
+
     def glo_bal():
         global version
         global money
@@ -63,6 +67,7 @@ if True:
         global vc_f_m
         global language
         global verification
+
 
     glo_bal()
 #  开始页
@@ -222,7 +227,7 @@ if True:
     win0.mainloop()
 #  主游戏
 if True:
-    time = 0
+    time = 1
 
     win0 = Tk()
     win0.title("game")
@@ -241,7 +246,7 @@ if True:
         def win1_esc():
             win1.destroy()
 
-        def event_win1(txt0, txt1, txt2, button0_def, button1_def):
+        def event_win1(txt0, txt1, txt2, button0_def, button1_def, temporary):
             message0 = Message(win1, text=txt0, width=300)
             button0 = Button(win1, text=txt1, command=button0_def)
             button1 = Button(win1, text=txt2, command=button1_def)
@@ -251,10 +256,8 @@ if True:
             if temporary == 1:
                 button1.pack()
 
-        random.randint(0, 4)
-        random0 = 1
+        random0 = random.randint(0, 4)
         if random0 == 0:
-            temporary = 0
             if language == 0:
                 txt0 = '无事发生'
                 txt1 = '确定'
@@ -262,9 +265,8 @@ if True:
                 txt0 = 'Nothing'
                 txt1 = 'ok'
 
-            event_win1(txt0, txt1, txt1, win1_esc, win1_esc)
+            event_win1(txt0, txt1, txt1, win1_esc, win1_esc, 0)
         elif random0 == 1:
-            temporary = 1
             if language == 0:
                 txt0 = '有一群难民,请求您的收留'
                 txt1 = '收留'
@@ -274,7 +276,7 @@ if True:
                 txt1 = 'retention'
                 txt2 = 'Drive away'
 
-            def event_refugee():
+            def event_random1():
                 def event_refugee_enable(txt0):
                     win2 = Tk()
                     win2.title("event_refugee")
@@ -333,13 +335,108 @@ if True:
 
                     event_refugee_enable(txt0)
 
-            event_win1(txt0, txt1, txt2, event_refugee, win1_esc)
+            event_win1(txt0, txt1, txt2, event_random1, win1_esc, 1)
         elif random0 == 2:
-            print()
+            if language == 0:
+                txt0 = '有一位商人,想和您交易'
+                txt1 = '交易'
+                txt2 = '赶走'
+            elif language == 1:
+                txt0 = 'There is a businessman who wants to trade with you'
+                txt1 = 'transaction'
+                txt2 = 'Drive away'
+
+            def event_random2():
+                win2 = Tk()
+                win2.title("event_businessman")
+                win2.geometry("320x180")
+                win2.iconbitmap("1.ico")
+                win2.resizable(False, False)
+
+                choice = random.randint(100, 500)
+
+                def event_random2_win2(txt0, txt1, choice):
+                    global money
+                    money = money + choice
+
+                    def win2_esc():
+                        win2.destroy()
+                        win1.destroy()
+
+                    message0 = Message(win2, text=txt0, width=300)
+                    button0 = Button(win2, text=txt1, command=win2_esc)
+
+                    message0.pack()
+                    button0.pack()
+
+                if random.randint(0, 3) == 0:
+                    if language == 0:
+                        txt0 = '亏了不少:' + str(choice)
+                        txt1 = '确定'
+                    elif language == 1:
+                        txt0 = ('Losing a lot:' + str(choice))
+                        txt1 = 'ok'
+                    event_random2_win2(txt0, txt1, -choice)
+                else:
+                    if language == 0:
+                        txt0 = ('您的金钱增加了:' + str(choice))
+                        txt1 = '确定'
+                    elif language == 1:
+                        txt0 = ('Your money has increased:' + str(choice))
+                        txt1 = 'ok'
+                    event_random2_win2(txt0, txt1, choice)
+
+                win2.mainloop()
+
+            event_win1(txt0, txt1, txt2, event_random2, win1_esc, 1)
         elif random0 == 3:
-            print()
+            if random.randint(0, 4) == 4:
+                choice = random.randint(100, 500)
+                temporary = random.randint(10, 50)
+
+                def event_random3():
+                    global field
+                    global population
+                    field = field - choice
+                    population = population - temporary
+                    win1.destroy()
+
+                if language == 0:
+                    txt0 = '发生了自然灾害,有所损失/n' + '损失土地:' + str(choice) + '/n死亡人口:' + str(temporary)
+                    txt1 = '确定'
+                elif language == 1:
+                    txt0 = ('Natural disasters have occurred and there have been losses/n' + 'Loss of land:' +
+                            str(choice) + '/nDeath toll:' + str(temporary))
+                    txt1 = 'ok'
+                event_win1(txt0, txt1, txt1, event_random3, event_random3, 0)
+            else:
+                if language == 0:
+                    txt0 = '无事发生'
+                    txt1 = '确定'
+                elif language == 1:
+                    txt0 = 'Nothing'
+                    txt1 = 'ok'
+                event_win1(txt0, txt1, txt1, win1_esc, win1_esc, 0)
         elif random0 == 4:
-            print()
+            choice = random.randint(20, 100)
+
+            def event_random4():
+                global field
+                global field_current
+                print(field)
+                field = field + choice
+                field_current = field_current + choice
+                print(field)
+                win1.destroy()
+
+            if language == 0:
+                txt0 = ('开垦了一片荒地,增加了不少可用于种植的土地:' + str(choice))
+                txt1 = '确定'
+            elif language == 1:
+                txt0 = ('Reclaimed a piece of wasteland and added a lot of land available for cultivation:' +
+                        str(choice))
+                txt1 = 'ok'
+            event_win1(txt0, txt1, txt1, event_random4, event_random4, 0)
 
 
     if event == 1:

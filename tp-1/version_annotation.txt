@@ -1,0 +1,1 @@
+'version';'money';'population';'population_price';'food';'field';'field_min';'field_max';'field_price';'Victory conditions_'money';'Victory conditions_population';'Victory conditions_food_Multiplier';'language';'verification'
