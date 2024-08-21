@@ -3,7 +3,7 @@
 import logging
 from datetime import datetime
 
-from game import u_v_s
+from sys_json import user_version_string as u_v_s
 from sys_json import user_w_version_json
 
 # 日志
