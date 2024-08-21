@@ -2,13 +2,12 @@
 
 # import
 import logging
-from datetime import datetime
 import sys
+from datetime import datetime
+
 # 获取用户基础信息
-# from sys_json import user_version_string as u_v_s
 from sys_json import user_user_string as u_u_s
-# 用户信息修改
-# from sys_json import user_w_information_json as user_w_i_j
+from sys_json import user_version_string as u_v_s
 
 # 日志初定义
 if True:
