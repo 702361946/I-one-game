@@ -31,16 +31,14 @@ print('hello')
 while True:
     temp = input('\n0 开始\n1 记录\n2 修改器\n9 退出\n')
     if temp == '0':
-        print('没做')
-        pass
+        game_user_page()
+        break
 
     elif temp == '1':
         game_result_page()
 
     elif temp == '2':
         u_v_s = modifier()
-
-        print(u_v_s)
 
     elif temp == '9':
         user_exit()

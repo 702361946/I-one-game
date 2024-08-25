@@ -21,15 +21,17 @@ def modify(temp_str):
     try:
         print(f'\n{temp_str}目前的值:{u_v_s[temp_str]}')
         try:
-            temp = int(input(f'请输入新的{temp_str}的值'))
+            temp = input(f'请输入新的{temp_str}的值')
+            temp = int(temp)
             u_v_s[temp_str] = temp
-            print(u_v_s[temp_str])
+            print('ok')
+            logging.info(f'modify \\ ok \\ {temp_str}={u_v_s[temp_str]} \\ user_input={temp}')
 
-        except ExceptionGroup as e:
+        except Exception as e:
             print(f'error {e}')
             logging.error(f'error \\ {e}')
 
-    except ExceptionGroup as e:
+    except Exception as e:
         print(f'error {e}')
         logging.error(f'error \\ {e}')
 
@@ -58,6 +60,11 @@ def modifier():
 
         elif temp == '8':
             user_w_version_json(u_v_s)
+            print('ok')
 
         elif temp == '9':
             return u_v_s
+
+
+logging.info('modifier ok and exit')
+logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')

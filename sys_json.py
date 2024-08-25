@@ -35,7 +35,7 @@ try:
         logging.info('user_version_string ok')
         logging.info(f'user_version_string=\n{user_version_string}')
 
-except ExceptionGroup as e:
+except Exception as e:
     print(f'error {e}')
     logging.error(f'error {e}')
     user_version_string = sys_version_string
@@ -47,7 +47,7 @@ def user_w_version_json(user_version_string):
         with open('user_version.json', 'w+') as f:
             json.dump(user_version_string, f, indent=4)
 
-    except ExceptionGroup as e:
+    except Exception as e:
         print(f'error {e}')
         logging.error(f'error {e}')
 
@@ -71,21 +71,22 @@ try:
         logging.info('user ok')
         logging.info(f'user=\n{user_user_string}')
 
-except ExceptionGroup as e:
+except Exception as e:
     print(f'error {e}')
     logging.info(f'error {e}')
     user_user_string = sys_user_string
 
 
+# 用户名等(u_u_s)
 def user_w_information_json(user_user_string):
     try:
         with open('user.json', 'w+') as f:
             json.dump(user_user_string, f, indent=4)
 
-    except ExceptionGroup as e:
+    except Exception as e:
         print(f'error {e}')
         logging.error(f'error {e}')
 
 
-logging.info('exit')
-logging.info(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+logging.info('json ok and exit')
+logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')

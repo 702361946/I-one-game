@@ -5,9 +5,11 @@ import logging
 import sys
 from datetime import datetime
 
-# 获取用户基础信息
+# 获取json定义的函数等
 from sys_json import user_user_string as u_u_s
-from sys_json import user_version_string as u_v_s
+from sys_json import user_w_information_json as u_w_i_j
+
+# from sys_json import user_version_string as u_v_s
 
 # 日志初定义
 if True:
@@ -52,5 +54,29 @@ def game_result_page():
         logging.info('False')
 
 
-logging.info(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+# user页
+def game_user_page():
+    logging.info('user_page')
+    t = 0
+    while True:
+        temp = input('输入您的用户名\n输入up以复用用户名')
+        logging.info(f'{t} user name={temp}')
+        if temp == 'up':
+            break
+
+        elif input(f'确定使用"{temp}"作为用户名吗?(y/n)') == 'y':
+
+            u_u_s['name'] = temp
+            u_w_i_j(u_u_s)
+
+            print(f'hello:{u_u_s['name']}')
+            break
+
+        else:
+            t += 1
+
+    logging.info(f'user name={u_u_s['name']}')
+
+
 logging.info('configure ok and exit')
+logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')
