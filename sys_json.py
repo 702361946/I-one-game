@@ -4,8 +4,11 @@ import json
 import logging
 from datetime import datetime
 
+# 获取日志路径
+from LocalLow_log import path
+
 if True:
-    logging.basicConfig(filename='game.log', filemode='w', level=logging.DEBUG, encoding='UTF-8')
+    logging.basicConfig(filename=path, filemode='w', level=logging.DEBUG, encoding='UTF-8')
     # 获取root logger
     root_logger = logging.getLogger()
     # 修改root logger的名称

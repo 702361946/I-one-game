@@ -8,6 +8,9 @@ try:
     from configure import *
     from modifier import modifier
 
+    # 获取日志路径
+    from LocalLow_log import path
+
 except Exception as e:
     print(f'error {e}')
     input('exit(Enter)')
@@ -15,7 +18,7 @@ except Exception as e:
 
 # 日志初定义
 if True:
-    logging.basicConfig(filename='game.log', filemode='w', level=logging.DEBUG, encoding='UTF-8')
+    logging.basicConfig(filename=path, filemode='w', level=logging.DEBUG, encoding='UTF-8')
     # 获取root logger
     root_logger = logging.getLogger()
     # 修改root logger的名称

@@ -3,12 +3,14 @@
 import logging
 from datetime import datetime
 
+# 获取日志路径
+from LocalLow_log import path
 from sys_json import user_version_string as u_v_s
-from sys_json import user_w_version_json
+from sys_json import user_w_version_json as u_w_v_j
 
 # 日志
 if True:
-    logging.basicConfig(filename='game.log', filemode='w', level=logging.DEBUG, encoding='UTF-8')
+    logging.basicConfig(filename=path, filemode='w', level=logging.DEBUG, encoding='UTF-8')
     # 获取root logger
     root_logger = logging.getLogger()
     # 修改root logger的名称
@@ -59,7 +61,7 @@ def modifier():
                 print('请输入正确的值')
 
         elif temp == '8':
-            user_w_version_json(u_v_s)
+            u_w_v_j(u_v_s)
             print('ok')
 
         elif temp == '9':
