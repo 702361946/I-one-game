@@ -25,7 +25,7 @@ sys_version_string = {
     'price_field': 10,
     'Victory conditions_money': 10000,
     'Victory conditions_population': 1000,
-    'Victory conditions_food_Multiplier': 1000
+    'Victory conditions_food_Multiplier': 100
 }
 
 logging.info('sys_version_string ok')
@@ -85,6 +85,36 @@ def user_w_information_json(user_user_string):
     try:
         with open('user.json', 'w+') as f:
             json.dump(user_user_string, f, indent=4)
+        logging.info('w user_user_string ok')
+
+    except Exception as e:
+        print(f'error {e}')
+        logging.error(f'error {e}')
+
+
+# 存档部分
+try:
+    with open('save.json', 'r+') as f:
+        save = json.load(f)
+        if save[0] is True:
+            save_u_u_s = save[1]
+            save_u_v_s = save[2]
+        logging.info('r save ok')
+        logging.info(f'save=\n{save}')
+
+except Exception as e:
+    print(f'error {e}')
+    logging.info(f'error {e}')
+
+
+def save_w():
+    logging.info('save')
+    temp = [True, user_user_string, user_version_string]
+    try:
+        with open('save.json', 'w+') as f:
+            json.dump(temp, f, indent=4)
+        logging.info('save ok')
+        print('保存完成')
 
     except Exception as e:
         print(f'error {e}')

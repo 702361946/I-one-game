@@ -5,6 +5,7 @@ from datetime import datetime
 
 # 获取日志路径
 from LocalLow_log import path
+# 配置
 from sys_json import user_version_string as u_v_s
 from sys_json import user_w_version_json as u_w_v_j
 
@@ -41,21 +42,33 @@ def modify(temp_str):
 def modifier():
     logging.info('modifier')
 
-    s_list = ['money', 'population', 'food', 'field', 'field_max', 'price_population', 'price_field',
-              'Victory conditions_money', 'Victory conditions_population', 'Victory conditions_food_Multiplier']
+    vc_list = ['Victory conditions_money', 'Victory conditions_population', 'Victory conditions_food_Multiplier']
+
+    resources_list = ['money', 'population', 'food', 'field', 'field_max', 'price_population', 'price_field']
+    r_l = resources_list
 
     while True:
-        temp = input(f'0 {s_list[0]}\n1 {s_list[1]}\n2 {s_list[2]}\n3 {s_list[3]}\n4 {s_list[4]}\n5 {s_list[5]}\n'
-                     f'6 {s_list[6]}\n7 Victory conditions\n8 Save to File\n9 Save and Exit\n')
+        temp = input(f'0 resources\n1 Victory conditions\n8 Save to File\n9 Save and Exit\n')
 
-        if '6' >= temp >= '0':
-            modify(s_list[int(temp)])
+        if temp == '0':
+            temp = input(f'0 {r_l[0]}\n1 {r_l[1]}\n2 {r_l[2]}\n3 {r_l[3]}\n4 {r_l[4]}\n5 {r_l[5]}\n6 {r_l[6]}\n9 Nix')
+            if '6' >= temp >= '0':
+                modify(r_l[int(temp)])
 
-        elif temp == '7':
+            elif temp == '9':
+                pass
+
+            else:
+                print('请输入正确的值')
+
+        elif temp == '1':
             print('Victory conditions')
-            temp = input(f'0 money\n1 population\n2 food_Multiplier\n')
+            temp = input(f'0 money\n1 population\n2 food_Multiplier\n9 Nix')
             if '2' >= temp >= '0':
-                modify(s_list[int(temp) + 7])
+                modify(vc_list[int(temp)])
+
+            elif temp == '9':
+                pass
 
             else:
                 print('请输入正确的值')

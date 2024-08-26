@@ -8,5 +8,5 @@
     "price_field": 10,
     "Victory conditions_money": 10000,
     "Victory conditions_population": 1000,
-    "Victory conditions_food_Multiplier": 1000
+    "Victory conditions_food_Multiplier": 100
 }
