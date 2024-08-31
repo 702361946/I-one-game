@@ -48,10 +48,10 @@ def modifier():
     r_l = resources_list
 
     while True:
-        temp = input(f'0 resources\n1 Victory conditions\n8 Save to File\n9 Save and Exit\n')
+        temp = input(f'0 resources\n1 Victory conditions\n2 event\n8 Save to File\n9 Save and Exit\n')
 
         if temp == '0':
-            temp = input(f'0 {r_l[0]}\n1 {r_l[1]}\n2 {r_l[2]}\n3 {r_l[3]}\n4 {r_l[4]}\n5 {r_l[5]}\n6 {r_l[6]}\n9 Nix')
+            temp = input(f'0 {r_l[0]}\n1 {r_l[1]}\n2 {r_l[2]}\n3 {r_l[3]}\n4 {r_l[4]}\n5 {r_l[5]}\n6 {r_l[6]}\n9 exit')
             if '6' >= temp >= '0':
                 modify(r_l[int(temp)])
 
@@ -63,7 +63,7 @@ def modifier():
 
         elif temp == '1':
             print('Victory conditions')
-            temp = input(f'0 money\n1 population\n2 food_Multiplier\n9 Nix')
+            temp = input(f'0 money\n1 population\n2 food_Multiplier\n9 exit')
             if '2' >= temp >= '0':
                 modify(vc_list[int(temp)])
 
@@ -72,6 +72,23 @@ def modifier():
 
             else:
                 print('请输入正确的值')
+
+        elif temp == '2':
+            logging.info('modifier event')
+            temp = input('0 open\n1 close\n9 cancel')
+            if temp == '0':
+                u_v_s['event_open'] = 0
+                print('ok')
+                logging.info('True')
+
+            elif temp == '1':
+                u_v_s['event_open'] = 1
+                print('ok')
+                logging.info('False')
+
+            else:
+                logging.info('cancel')
+                print('已取消')
 
         elif temp == '8':
             u_w_v_j(u_v_s)

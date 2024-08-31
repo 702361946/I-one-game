@@ -1,4 +1,5 @@
 #  Copyright (c)
+import logging
 
 # 备注
 # 尝试尝试ConfigManager()
@@ -77,6 +78,14 @@ while True:
     p_t_l = round(u_v_s['field'] / u_v_s['population'], 2)
     print(f'回合{time}开始\n当前持有金钱{u_v_s['money']}\n人地比为:{p_t_l}')
     logging.info(f'time={time}\\money={u_v_s["money"]}\\population={u_v_s['population']}\\field={u_v_s['field']}')
+    logging.info(f'event_open={u_v_s["event_open"]}')
+    if u_v_s['event_open'] == 0:
+        logging.info('event open')
+        event_page()
+
+    else:
+        logging.info('event close')
+        print('事件未启用')
 
     while True:
         temp = input(f'0 资源查看\n1 商店\n7 保存进度\n8 下一回合\n9 退出')
@@ -96,6 +105,9 @@ while True:
 
         elif temp == '9':
             user_exit()
+
+        elif temp == 'modifier':
+            modifier()
 
         else:
             print('请输入正确的值')

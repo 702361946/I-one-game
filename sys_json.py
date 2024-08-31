@@ -23,9 +23,11 @@ sys_version_string = {
     'field_max': 5000,
     'price_population': 10,
     'price_field': 10,
+    'food_times': 0,
     'Victory conditions_money': 10000,
     'Victory conditions_population': 1000,
-    'Victory conditions_food_Multiplier': 100
+    'Victory conditions_food_Multiplier': 100,
+    'event': 9
 }
 
 logging.info('sys_version_string ok')
