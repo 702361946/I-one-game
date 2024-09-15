@@ -79,13 +79,12 @@ def user_page():
             u_u_s['name'] = temp
             u_w_i_j(u_u_s)
 
-            print(f'hello:{u_u_s['name']}')
             break
 
         else:
             t += 1
 
-    print(f'hello {u_u_s['name']}')
+    print(f'hello:{u_u_s['name']}')
 
     logging.info(f'user name={u_u_s['name']}')
     logging.info('exit page\n')
@@ -108,13 +107,13 @@ def stop_page():
     def stop_w(string):
         logging.info(f'stop:{string}')
         logging.info(f'money={u_v_s['money']}\\{string}={u_v_s[string]}')
-        l_zh = {
+        language = {
             'population': '人口',
             'field': '土地',
         }
         temp_max = u_v_s['money'] // u_v_s['price_' + string]
-        print(f'目前持有金钱:{u_v_s['money']}\n目前持有{l_zh['string']}:{u_v_s[string]}\n'
-              f'目前{l_zh['string']}单价:{u_v_s["price_" + string]}')
+        print(f'目前持有金钱:{u_v_s['money']}\n目前持有{language[string]}:{u_v_s[string]}\n'
+              f'目前{language[string]}单价:{u_v_s["price_" + string]}')
 
         while True:
             temp = input(f'最大可购买{temp_max}\n输入你要的数量(整数)')
@@ -127,7 +126,7 @@ def stop_page():
                 elif temp <= temp_max:
                     u_v_s[string] += temp
                     u_v_s['money'] -= u_v_s['price_' + string] * temp
-                    print(f'购买成功\n目前持有金钱:{u_v_s["money"]}\n目前持有{l_zh['string']}:{u_v_s[string]}')
+                    print(f'购买成功\n目前持有金钱:{u_v_s["money"]}\n目前持有{language['string']}:{u_v_s[string]}')
                     u_v_s['price_' + string] *= 1.05
                     logging.info('True')
                     logging.info(f'money={u_v_s['money']}\\{string}={u_v_s[string]}')
@@ -145,7 +144,7 @@ def stop_page():
 
     while True:
         print(f'目前持有金钱:{u_v_s['money']}')
-        temp = input('\n0 人口\n1 土地\n2 救济食物(没做完)\n9 退出商店\n')
+        temp = input('\n0 人口\n1 土地\n2 救济食物\n9 退出商店\n')
 
         if temp == '0':
             stop_w('population')
@@ -179,88 +178,122 @@ def stop_page():
 # event
 def event_page():
     logging.info('event page')
-    # 抉择,纯减,纯加
-    event_name_list = [3, 1, 1, "流浪商人", "逃难难民", "投资机会", "自然灾害", "节日庆典"]
-    e_n_l = event_name_list
+    # 抉择,有利,不利
+    # choice,advantageous,disadvantageous
+    event_type = ["抉择", "有利", "不利"]
+    event_choice = ["流浪商人来访", "交易", "money",
+                    "逃难难民请求收留", "收留", "population",
+                    "有一个投资机会", "投资", "money",
+                    "拒绝"]
+    event_advantageous = ["非常难碰到的节日庆典", "money"]
+    event_disadvantageous = ["自然灾害:地震", "自然灾害:干旱", "自然灾害:洪水", "自然灾害:泥石流", "自然灾害:火灾"]
+    # 翻译字典(后面多语言的时候把这玩意干掉)
+    language = {
+        "money": "金钱",
+        "population": "人口"
+    }
+
     if random.randint(1, 100) <= 40:
         print('无事发生')
         logging.info('False')
 
     else:
-        temp = random.randint(3, len(e_n_l) - 1)
-        logging.info(f'True \\ random={temp}')
-        print(f'事件:{event_name_list[temp]}')
-        if 2 + e_n_l[0] >= temp >= 3:
-            if temp == 3:
-                temp_str0 = '商人请求交易'
-                temp_str1 = '交易'
-                temp_open0 = 0
-                temp_open1 = False
+        temp = random.randint(0, 2)
+        logging.info(f'True \\ type={event_type[temp]}')
+        print(f'{event_type[temp]}类型事件')
+        if temp == 0:
+            temp = random.randint(0, (len(event_choice) - 1) // 3 - 1) * 3
+            temp_list = [event_choice[temp], event_choice[temp + 1], event_choice[temp + 2]]
+            temp = input(f'{temp_list[0]}\n0 {temp_list[1]}\n9 {event_choice[-1]}\n')
+            logging.info(temp_list)
 
-            elif temp == 4:
-                temp_str0 = '一群难民请求收留'
-                temp_str1 = '收留'
-                temp_open0 = 1
-                temp_open1 = True
+            if temp_list[2] == 'money':
+                t_random = random.randint(50, 300)
+            elif temp_list[2] == 'population':
+                t_random = random.randint(10, 50)
+            logging.info(f'random = {t_random}')
 
-            elif temp == 5:
-                temp_str0 = '发现了一个投资机会'
-                temp_str1 = '投资'
-                temp_open0 = 0
-                temp_open1 = False
-
-            else:
-                print('error')
-                logging.error('if temp?')
-
-            print(f'{temp_str0}\n做出选择吧\n')
-            
-            while True:
-                temp = input(f'0 {temp_str1}\n9 close')
-                if temp == '0':
-                    temp_m = random.randint(50, 250)
-                    temp_p = random.randint(10, 50)
-                    if temp_open0 == 0:
-                        if random.randint(1, 100) <= 55:
-                            u_v_s['money'] += temp_m
-                            print(f'赚了{temp_m}')
-
-                        else:
-                            u_v_s['money'] -= temp_m
-                            print(f'亏了{temp_m}')
-
-                    elif temp_open0 == 1:
-                        if True:
-                            if temp_open1 is True and random.randint(1,100) <=40:
-                                print('这伙人是犯罪分子\n并且把你们都杀光了')
-                                u_v_s['money'] = 0
-                                u_v_s['population'] = 0
-                                u_v_s['food'] = 0
-                                # 调用结束页
-                                input('游戏结束')
-
-                            u_v_s['population'] += temp_p
-                            print(f'增长{temp_p}人')
-
-                    break
-                
-                elif temp == '9':
-                    print('已取消')
-                    break
+            if temp == '0':
+                if random.randint(1, 100) <= 60:
+                    u_v_s[temp_list[2]] += t_random
+                    print(f'{language[temp_list[2]]}增加了:{t_random}')
 
                 else:
-                    print('请输入正确的值')
+                    u_v_s[temp_list[2]] -= t_random
+                    print(f'{language[temp_list[2]]}减少了:{t_random}')
 
-        elif 2 + e_n_l[0] + e_n_l[1] >= temp >= 2 + e_n_l[0]:
-            pass
+        elif temp == 1:
+            temp = random.randint(0, (len(event_advantageous)) // 2 - 1) * 2
+            temp_list = [event_advantageous[temp], event_advantageous[temp + 1]]
+            logging.info(temp_list)
 
-        elif len(e_n_l) - 1 >= temp >= 2 + e_n_l[0] + e_n_l[1]:
-            pass
+            print(f'{temp_list[0]}')
+            if temp_list[1] =='money':
+                temp = random.randint(100, 500)
+
+            u_v_s[temp_list[1]] += temp
+            print(f'{language[temp_list[1]]}增加了:{temp}')
+            logging.info(f'random = {temp}')
+
+        elif temp == 2:
+            temp = random.randint(0, (len(event_disadvantageous) - 1))
+            temp_list = [event_disadvantageous[temp]]
+
+            print(f'{temp_list[0]}')
+
+            temp = random.randint(50, 300)
+            u_v_s['money'] -= temp
+            print(f'金钱减少了:{temp}')
+            logging.info(f'money - {temp}')
+
+            temp = random.randint(10, 50)
+            u_v_s['population'] -= temp
+            print(f'人口减少了:{temp}')
+            logging.info(f'population - {temp}')
 
         else:
-            logging.debug(f'temp={temp} \\ e_n_l len={len(e_n_l)}')
+            logging.debug(f'temp={temp}')
 
     logging.info('exit page\n')
+
+
+# 结算页
+def settlement_page():
+    logging.info('settlement_page')
+    # 资源结算
+    u_v_s['money'] += u_v_s['population']
+    u_v_s['food'] += u_v_s['field']
+
+    if u_v_s['food'] >= u_v_s['population']:
+        u_v_s['food'] -= u_v_s['population']
+
+    else:
+        u_v_s['population'] -= u_v_s['population'] - u_v_s['food']
+        u_v_s['food'] = 0
+        print('食物不足')
+        logging.info('food < 0')
+
+    # 结束判定
+    result_if = True
+    if u_v_s['money'] >= u_v_s['Victory conditions_money']:
+        u_u_s['result'] = 0
+
+    elif u_v_s['population'] >= u_v_s['Victory conditions_population']:
+        u_u_s['result'] = 1
+
+    elif u_v_s['food'] >= u_v_s['Victory conditions_food_Multiplier'] * u_v_s['population']:
+        u_u_s['result'] = 2
+
+    elif u_v_s['food'] < 0:
+        u_u_s['result'] = 8
+
+    elif u_v_s['population'] < 0:
+        u_u_s['result'] = 9
+
+    else:
+        result_if = False
+
+    return result_if
 
 
 logging.info('configure ok and exit')

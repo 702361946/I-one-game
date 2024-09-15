@@ -36,7 +36,7 @@ if True:
 # 定义补充
 
 # 内容
-print('hello')
+print('hello user')
 
 while True:
     temp = input('\n0 开始\n1 记录\n2 修改器\n9 退出\n')
@@ -114,40 +114,8 @@ while True:
 
         # 结束结算
         if time_settlement_if is True:
-            logging.info('settlement')
-            # 增
-            u_v_s['money'] += u_v_s['population']
-            u_v_s['food'] += u_v_s['field']
-
-            if u_v_s['food'] >= u_v_s['population']:
-                u_v_s['food'] -= u_v_s['population']
-
-            else:
-                u_v_s['population'] -= u_v_s['population'] - u_v_s['food']
-                u_v_s['food'] = 0
-                print('食物不足')
-                logging.info('food<0')
-
-            # 结算区
-            if u_v_s['money'] >= u_v_s['Victory conditions_money']:
-                result_if = True
-                u_u_s['result'] = 0
-
-            elif u_v_s['population'] >= u_v_s['Victory conditions_population']:
-                result_if = True
-                u_u_s['result'] = 1
-
-            elif u_v_s['food'] >= u_v_s['Victory conditions_field_Multiplier'] * u_v_s['population']:
-                result_if = True
-                u_u_s['result'] = 2
-
-            elif u_v_s['food'] < 0:
-                result_if = True
-                u_u_s['result'] = 8
-
-            elif u_v_s['population'] < 0:
-                result_if = True
-                u_u_s['result'] = 9
+            # 结算
+            result_if = settlement_page()
 
             # 结算后
             time_settlement_if = False
