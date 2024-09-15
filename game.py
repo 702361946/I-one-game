@@ -130,12 +130,13 @@ while True:
 # 游戏结束
 if True:
     print('游戏结束')
-    if u_u_s['result'] <= 5:
+    if u_u_s['result'] is not None and u_u_s['result'] <= 5:
         print(f'你赢了\n结局为{u_u_s['result']}')
 
     else:
         print(f'你输了\n结局为{u_u_s['result']}')
 
     print('请自行对照结局表')
+    save_w()
 
 input('按下回车(Enter)结束游戏')

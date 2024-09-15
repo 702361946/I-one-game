@@ -64,7 +64,7 @@ logging.info('open user')
 # user
 sys_user_string = {
     'name': None,
-    'time': None,
+    'time': 1,
     'result': None
 }
 

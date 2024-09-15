@@ -30,6 +30,7 @@ def user_exit():
         temp = input('\n0 exit(退出)\n1 continue(返回)\n')
         if temp == '0':
             logging.info('user exit')
+            logging.info(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n')
             sys.exit(0)
         elif temp == '1':
             logging.info('user exit continue\n')
@@ -126,7 +127,7 @@ def stop_page():
                 elif temp <= temp_max:
                     u_v_s[string] += temp
                     u_v_s['money'] -= u_v_s['price_' + string] * temp
-                    print(f'购买成功\n目前持有金钱:{u_v_s["money"]}\n目前持有{language['string']}:{u_v_s[string]}')
+                    print(f'购买成功\n目前持有{language[string]}:{u_v_s[string]}')
                     u_v_s['price_' + string] *= 1.05
                     logging.info('True')
                     logging.info(f'money={u_v_s['money']}\\{string}={u_v_s[string]}')
@@ -135,6 +136,7 @@ def stop_page():
                 elif temp > temp_max:
                     print('钱不够')
                     logging.info('False')
+                    break
 
             except ValueError:
                 print('输整数!')
@@ -272,6 +274,8 @@ def settlement_page():
         u_v_s['food'] = 0
         print('食物不足')
         logging.info('food < 0')
+
+    u_u_s['time'] += 1
 
     # 结束判定
     result_if = True
