@@ -45,6 +45,7 @@ while True:
             if save[0] is True:
                 u_u_s = save_u_u_s
                 u_v_s = save_u_v_s
+                print('成功加载')
             else:
                 print('加载失败')
                 user_page()

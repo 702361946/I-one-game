@@ -65,10 +65,19 @@ def result_page():
 def user_page():
     logging.info('user_page')
     t = 0
+    if type(u_u_s['name']).__name__ == 'str' and not u_u_s['name'] == '':
+        t_if = 0
+    else:
+        t_if = 1
+
     while True:
-        temp = input('输入您的用户名\n输入up以复用用户名')
+        if t_if == 0:
+            temp = input('输入您的用户名\n输入up以复用用户名')
+        elif t_if == 1:
+            temp = input('输入您的用户名')
+
         logging.info(f'{t} user name={temp}')
-        if temp == 'up':
+        if temp == 'up' and t_if == 0:
             break
 
         elif temp == '':
@@ -128,7 +137,7 @@ def stop_page():
                     u_v_s[string] += temp
                     u_v_s['money'] -= u_v_s['price_' + string] * temp
                     print(f'购买成功\n目前持有{language[string]}:{u_v_s[string]}')
-                    u_v_s['price_' + string] *= 1.05
+                    u_v_s['price_' + string] = int(u_v_s['price_' + string] * 1.05 // 1 + 1)
                     logging.info('True')
                     logging.info(f'money={u_v_s['money']}\\{string}={u_v_s[string]}')
                     break
