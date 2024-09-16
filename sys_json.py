@@ -65,7 +65,7 @@ logging.info('open user')
 sys_user_string = {
     'name': '',
     'time': 1,
-    'result': 10
+    'result': 99
 }
 
 logging.info('sys_user_string ok')
@@ -101,8 +101,8 @@ try:
         if save[0] is True:
             save_u_u_s = save[1]
             save_u_v_s = save[2]
-        logging.info('r save ok')
-        logging.info(f'save=\n{save}')
+        logging.info('r record ok')
+        logging.info(f'record=\n{save}')
 
 except Exception as e:
     print(f'error {e}')
@@ -110,12 +110,12 @@ except Exception as e:
 
 
 def save_w():
-    logging.info('save')
+    logging.info('record')
     temp = [True, user_user_string, user_version_string]
     try:
         with open('save.json', 'w+') as f:
             json.dump(temp, f, indent=4)
-        logging.info('save ok')
+        logging.info('record ok')
         print('保存完成')
 
     except Exception as e:

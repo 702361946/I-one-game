@@ -139,5 +139,6 @@ if True:
 
     print('请自行对照结局表')
     save_w()
+    u_w_i_j(u_u_s)
 
 input('按下回车(Enter)结束游戏')

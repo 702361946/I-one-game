@@ -1,22 +1,3 @@
 [
-    true,
-    {
-        "name": "ff",
-        "time": 53,
-        "result": 1
-    },
-    {
-        "money": 1068.65,
-        "population": 1064,
-        "food": 4120,
-        "field": 412,
-        "field_max": 5000,
-        "price_population": 11.576250000000002,
-        "price_field": 11.576250000000002,
-        "food_times": 3,
-        "Victory conditions_money": 10000,
-        "Victory conditions_population": 1000,
-        "Victory conditions_food_Multiplier": 100,
-        "event_open": 9
-    }
+    false
 ]
