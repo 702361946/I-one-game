@@ -2,6 +2,7 @@
 import json
 import logging
 import os
+import re
 import socket
 import time
 import uuid
@@ -32,30 +33,6 @@ while True:
         print('请输入正确的值(y/n)')
 
 
-try:
-    with (open('user.json', 'r+') as f):
-        record = json.load(f)
-        logging.info(f'record={record}')
-        if (not record['name'] == '' and
-                type(record['name']).__name__ == 'str' and
-                type(record['time']).__name__ == 'int' and
-                type(record['result']).__name__ == 'int' and
-                not record['result'] == 99):
-
-            logging.info('record True')
-            pass
-        else:
-            logging.info('record False')
-            print('请确认记录无问题')
-            input('按下Enter退出')
-            exit()
-
-except Exception as e:
-    logging.error(f'error:{e}')
-    input('error')
-    exit()
-
-
 # 创建UDP套接字
 k_udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 k_udp.setblocking(False)
@@ -84,14 +61,34 @@ def send_data(data: str):
 
 
 def recv(t_recv):
-    print(t_recv)
+    # download record,{数据}
+    t_recv = t_recv.split(',')
+
+    if t_recv[0] == 'download record' and t_recv[1].split('=')[1] == re.sub(r':', '', mac_id):
+        try:
+            t_recv = {
+                'name': t_recv[2].split('=')[1],
+                'time': int(t_recv[3].split('=')[1]),
+                'result': int(t_recv[4].split('=')[1])
+            }
+            with open('json/user.json', 'w+') as f:
+                json.dump(t_recv, f, indent=4)
+
+            print('保存完成')
+
+        except Exception as e:
+            print(f'error:{e}')
+
+    else:
+        print('格式错误,请联系\n702361946@qq.com')
+        logging.debug(t_recv)
 
 
 # 5.主循环
 temp_if = True
 while True:
     if temp_if:
-        temp = input('0 上传记录\n1 下载记录\n9 退出上传')
+        temp = input('0 上传记录\n1 下载记录\n9 退出工具')
 
     else:
         print('退出')
@@ -107,11 +104,34 @@ while True:
             mac_id = get_mac_address()
 
             if temp == '0':
-                send_data(
-                    f'up record,mac_id={mac_id},name={record['name']},time={record['time']},result={record['result']}')
-                time.sleep(1)
-                recv_data = k_udp.recvfrom(1024)  # 1024表示本次接收的最大字节数
-                recv(recv_data[0].decode("utf-8"))
+                # 检查
+                try:
+                    with (open('json/user.json', 'r+') as f):
+                        record = json.load(f)
+                        logging.info(f'record={record}')
+
+                    if (not record['name'] == '' and
+                                type(record['name']).__name__ == 'str' and
+                                type(record['time']).__name__ == 'int' and
+                                type(record['result']).__name__ == 'int' and
+                                not record['result'] == 99):
+                        logging.info('record True')
+
+                        # 发送
+                        send_data(
+                            f'up record,mac_id={mac_id},name={record['name']},time={record['time']},result={record['result']}')
+                        time.sleep(1)
+                        recv_data = k_udp.recvfrom(1024)  # 1024表示本次接收的最大字节数
+                        recv(recv_data[0].decode("utf-8"))
+
+                    else:
+                        logging.info('record False')
+                        print('请确认记录无问题')
+                        input('按下Enter退出')
+
+                except Exception as e:
+                    logging.error(f'error:{e}')
+                    input('error')
 
             elif temp == "1":
                 send_data(

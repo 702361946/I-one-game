@@ -7,7 +7,7 @@ import sys
 from datetime import datetime
 
 # 获取日志路径
-from LocalLow_log import path
+from path import path
 # 获取json定义的函数等
 from sys_json import user_user_string as u_u_s
 from sys_json import user_version_string as u_v_s

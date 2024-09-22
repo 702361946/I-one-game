@@ -16,7 +16,7 @@ try:
         from sys_json import save_u_u_s, save_u_v_s
 
     # 获取日志路径
-    from LocalLow_log import path
+    from path import path
 
 except Exception as e:
     print(f'error {e}')

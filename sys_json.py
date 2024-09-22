@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 
 # 获取日志路径
-from LocalLow_log import path
+from path import path
 
 if True:
     logging.basicConfig(filename=path, filemode='w', level=logging.DEBUG, encoding='UTF-8')
@@ -35,7 +35,7 @@ logging.info(f'sys_version_string=\n{sys_version_string}')
 
 # 读用户定义的配置
 try:
-    with open('user_version.json', 'r+') as f:
+    with open('json/user_version.json', 'r+') as f:
         user_version_string = json.load(f)
         logging.info('user_version_string ok')
         logging.info(f'user_version_string=\n{user_version_string}')
@@ -49,7 +49,7 @@ except Exception as e:
 # 使用json.dump()将字典写入到文件中
 def user_w_version_json(user_version_string):
     try:
-        with open('user_version.json', 'w+') as f:
+        with open('json/user_version.json', 'w+') as f:
             json.dump(user_version_string, f, indent=4)
 
     except Exception as e:
@@ -71,7 +71,7 @@ sys_user_string = {
 logging.info('sys_user_string ok')
 
 try:
-    with open('user.json', 'r+') as f:
+    with open('json/user.json', 'r+') as f:
         user_user_string = json.load(f)
         logging.info('user ok')
         logging.info(f'user=\n{user_user_string}')
@@ -85,7 +85,7 @@ except Exception as e:
 # 用户名等(u_u_s)
 def user_w_information_json(user_user_string):
     try:
-        with open('user.json', 'w+') as f:
+        with open('json/user.json', 'w+') as f:
             json.dump(user_user_string, f, indent=4)
         logging.info('w user_user_string ok')
 
@@ -96,7 +96,7 @@ def user_w_information_json(user_user_string):
 
 # 存档部分
 try:
-    with open('save.json', 'r+') as f:
+    with open('json/save.json', 'r+') as f:
         save = json.load(f)
         if save[0] is True:
             save_u_u_s = save[1]
@@ -113,7 +113,7 @@ def save_w():
     logging.info('record')
     temp = [True, user_user_string, user_version_string]
     try:
-        with open('save.json', 'w+') as f:
+        with open('json/save.json', 'w+') as f:
             json.dump(temp, f, indent=4)
         logging.info('record ok')
         print('保存完成')

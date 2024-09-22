@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 
 # 获取日志路径
-from LocalLow_log import path
+from path import path
 # 配置
 from sys_json import user_version_string as u_v_s
 from sys_json import user_w_version_json as u_w_v_j
