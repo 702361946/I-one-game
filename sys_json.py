@@ -1,11 +1,12 @@
 #  Copyright (c)
 
-import json
 import logging
+import os
 from datetime import datetime
 
+import json
 # 获取日志路径
-from path import path
+from GUI_path import path
 
 if True:
     logging.basicConfig(filename=path, filemode='w', level=logging.DEBUG, encoding='UTF-8')
@@ -27,15 +28,28 @@ sys_version_string = {
     'Victory conditions_money': 10000,
     'Victory conditions_population': 1000,
     'Victory conditions_food_Multiplier': 100,
-    'event': 9
+    'event_open': 9
 }
 
 logging.info('sys_version_string ok')
 logging.info(f'sys_version_string=\n{sys_version_string}')
 
+
+# 使用json.dump()将字典写入到文件中
+def user_w_version_json(user_version_string):
+    os.makedirs(os.path.dirname('json\\user_version.json'), exist_ok=True)
+    try:
+        with open('json\\user_version.json', 'w+') as f:
+            json.dump(user_version_string, f, indent=4)
+
+    except Exception as e:
+        print(f'error {e}')
+        logging.error(f'error {e}')
+
+
 # 读用户定义的配置
 try:
-    with open('json/user_version.json', 'r+') as f:
+    with open('json\\user_version.json', 'r+') as f:
         user_version_string = json.load(f)
         logging.info('user_version_string ok')
         logging.info(f'user_version_string=\n{user_version_string}')
@@ -44,20 +58,8 @@ except Exception as e:
     print(f'error {e}')
     logging.error(f'error {e}')
     user_version_string = sys_version_string
+    user_w_version_json(sys_version_string)
 
-
-# 使用json.dump()将字典写入到文件中
-def user_w_version_json(user_version_string):
-    try:
-        with open('json/user_version.json', 'w+') as f:
-            json.dump(user_version_string, f, indent=4)
-
-    except Exception as e:
-        print(f'error {e}')
-        logging.error(f'error {e}')
-
-
-logging.info(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 logging.info('open user')
 
@@ -70,8 +72,22 @@ sys_user_string = {
 
 logging.info('sys_user_string ok')
 
+
+# 用户名等(u_u_s)
+def user_w_information_json(user_user_string):
+    os.makedirs(os.path.dirname('json\\user.json'), exist_ok=True)
+    try:
+        with open('json\\user.json', 'w+') as f:
+            json.dump(user_user_string, f, indent=4)
+        logging.info('w user_user_string ok')
+
+    except Exception as e:
+        print(f'error {e}')
+        logging.error(f'error {e}')
+
+
 try:
-    with open('json/user.json', 'r+') as f:
+    with open('json\\user.json', 'r+') as f:
         user_user_string = json.load(f)
         logging.info('user ok')
         logging.info(f'user=\n{user_user_string}')
@@ -80,18 +96,7 @@ except Exception as e:
     print(f'error {e}')
     logging.info(f'error {e}')
     user_user_string = sys_user_string
-
-
-# 用户名等(u_u_s)
-def user_w_information_json(user_user_string):
-    try:
-        with open('json/user.json', 'w+') as f:
-            json.dump(user_user_string, f, indent=4)
-        logging.info('w user_user_string ok')
-
-    except Exception as e:
-        print(f'error {e}')
-        logging.error(f'error {e}')
+    user_w_information_json(sys_user_string)
 
 
 # 存档部分
