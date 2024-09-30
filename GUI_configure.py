@@ -13,9 +13,9 @@ from tkinter import messagebox
 # 获取日志路径
 from GUI_path import path
 # 获取json定义的函数等
-from sys_json import user_user_string as u_u_s
-from sys_json import user_version_string as u_v_s
-from sys_json import user_w_information_json as u_w_i_j
+from GUI_sys_json import user_user_string as u_u_s
+from GUI_sys_json import user_version_string as u_v_s
+from GUI_sys_json import user_w_information_json as u_w_i_j
 
 # 窗口配置
 win_geometry = '320x180'

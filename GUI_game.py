@@ -7,7 +7,6 @@ import logging
 # import
 try:
     from GUI_configure import *
-    from modifier import modifier
 
     # 获取日志路径
     from GUI_path import path
@@ -42,10 +41,9 @@ def game_a():
     win.geometry(win_geometry)
     win.resizable(win_resizable[0], win_resizable[1])
 
-    pack_message(win, t_text='UI版本暂不提供存档\n修改器请看控制台')
+    pack_message(win, t_text='UI版本暂不提供存档\n修改器暂不可用')
     pack_button(win, t_text='开始游戏', t_command=lambda: [close_win(win), user_name_page()])
     pack_button(win, t_text='查看记录', t_command=lambda: result_page())
-    pack_button(win, t_text='修改器', t_command=lambda: modifier())
     pack_button(win, t_text='退出游戏', t_command=lambda: user_exit_page())
 
     win.mainloop()
@@ -119,6 +117,8 @@ if __name__ == '__main__':
 
     # 游戏结束
     if True:
+        u_w_i_j(u_u_s)
+
         win = Tk()
         win.title('game')
         win.iconbitmap('1.ico')
@@ -137,7 +137,5 @@ if __name__ == '__main__':
 
         pack_message(win, t_text='请自行对照结局表')
         pack_button(win, t_text='结束游戏', t_command=lambda: [close_win(win), sys_exit(0)])
-
-        u_w_i_j(u_u_s)
 
         win.mainloop()
